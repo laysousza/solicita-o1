@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Manutenção</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('fundo_dashboard.png'); /* Padrão TEGRAM */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="p-4 md:p-8 font-sans">
+
+    <div class="max-w-4xl mx-auto bg-white/95 shadow-2xl rounded-2xl overflow-hidden border border-slate-200">
+        <div class="bg-slate-900 p-6 flex items-center justify-between text-white">
+            <div class="flex items-center gap-4">
+                <img src="logo.png" alt="Logo" class="h-12 w-auto">
+                <h1 class="text-xl font-bold uppercase tracking-widest">Abertura de Solicitação</h1>
+            </div>
+        </div>
+
+        <div class="flex border-b border-slate-200 bg-slate-50">
+            <button onclick="openTab(event, 'eletrica')" class="tab-btn flex-1 py-4 font-bold text-slate-500 border-b-2 border-transparent hover:bg-slate-100 transition active-tab bg-blue-50 border-blue-600 text-blue-600">
+                ⚡ ELÉTRICA
+            </button>
+            <button onclick="openTab(event, 'mecanica')" class="tab-btn flex-1 py-4 font-bold text-slate-500 border-b-2 border-transparent hover:bg-slate-100 transition">
+                ⚙️ MECÂNICA
+            </button>
+            <button onclick="openTab(event, 'refrigeracao')" class="tab-btn flex-1 py-4 font-bold text-slate-500 border-b-2 border-transparent hover:bg-slate-100 transition">
+                ❄️ REFRIGERAÇÃO
+            </button>
+        </div>
+
+        <div class="p-8">
+            <form action="#" method="POST" id="form-manutencao">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Equipamento / TAG</label>
+                        <input type="text" placeholder="Ex: MOTOR-01" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Prioridade</label>
+                        <select class="w-full p-3 border rounded-lg outline-none">
+                            <option>Normal</option>
+                            <option class="text-orange-500 font-bold">Urgente</option>
+                            <option class="text-red-600 font-bold">Emergencial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="eletrica" class="tab-content active">
+                    <h3 class="text-blue-600 font-bold mb-4">Detalhes da Falha Elétrica</h3>
+                    <textarea rows="4" placeholder="Descreva o problema (Curto-circuito, painel desligado, etc...)" class="w-full p-3 border rounded-lg outline-none focus:border-blue-500"></textarea>
+                </div>
+
+                <div id="mecanica" class="tab-content">
+                    <h3 class="text-slate-700 font-bold mb-4">Detalhes da Falha Mecânica</h3>
+                    <textarea rows="4" placeholder="Descreva o problema (Ruído excessivo, quebra de peça, lubrificação...)" class="w-full p-3 border rounded-lg outline-none focus:border-slate-500"></textarea>
+                </div>
+
+                <div id="refrigeracao" class="tab-content">
+                    <h3 class="text-cyan-600 font-bold mb-4">Detalhes de Refrigeração</h3>
+                    <textarea rows="4" placeholder="Descreva o problema (Vazamento de gás, temperatura alta, compressor...)" class="w-full p-3 border rounded-lg outline-none focus:border-cyan-500"></textarea>
+                </div>
+
+                <button type="submit" class="mt-8 w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1">
+                    ENVIAR SOLICITAÇÃO
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Esconde todos os conteúdos
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove a classe ativa de todos os botões
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" bg-blue-50 border-blue-600 text-blue-600", "");
+            }
+
+            // Mostra a aba atual e adiciona classe ativa ao botão
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " bg-blue-50 border-blue-600 text-blue-600";
+        }
+    </script>
+</body>
+</html>
